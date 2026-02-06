@@ -3,161 +3,636 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HTML Injector Style</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <title>HTML Injector - Modern UI</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        :root {
+            --primary-color: #6c63ff;
+            --primary-dark: #554fd8;
+            --danger-color: #ff4757;
+            --success-color: #2ed573;
+            --warning-color: #ffa502;
+            --bg-dark: #0f0f23;
+            --bg-card: #1a1a2e;
+            --bg-card-hover: #22223a;
+            --text-primary: #ffffff;
+            --text-secondary: #b0b0d0;
+            --border-radius: 16px;
+            --transition-speed: 0.3s;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
             font-family: 'Poppins', sans-serif;
-            background-color: #121212;
-            color: white;
+            background-color: var(--bg-dark);
+            background-image: 
+                radial-gradient(circle at 20% 30%, rgba(108, 99, 255, 0.15) 0%, transparent 30%),
+                radial-gradient(circle at 80% 70%, rgba(255, 71, 87, 0.1) 0%, transparent 30%);
+            color: var(--text-primary);
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
+            min-height: 100vh;
             margin: 0;
+            padding: 20px;
         }
 
         .container {
-            text-align: center;
-            border-radius: 10px;
-            background-color: #1f1f1f;
+            width: 100%;
+            max-width: 500px;
+            background-color: var(--bg-card);
+            border-radius: var(--border-radius);
             padding: 30px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
-            width: 400px;
+            box-shadow: 
+                0 10px 30px rgba(0, 0, 0, 0.4),
+                0 0 0 1px rgba(108, 99, 255, 0.1);
+            transition: transform 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-color), var(--danger-color));
+            z-index: 1;
+        }
+
+        .container:hover {
+            transform: translateY(-5px);
+            box-shadow: 
+                0 15px 35px rgba(0, 0, 0, 0.5),
+                0 0 0 1px rgba(108, 99, 255, 0.2);
+        }
+
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 30px;
+        }
+
+        .title-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo-icon {
+            background: linear-gradient(135deg, var(--primary-color), var(--danger-color));
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            box-shadow: 0 5px 15px rgba(108, 99, 255, 0.3);
         }
 
         h1 {
-            color: red;
-            font-size: 2.5em;
-            margin-bottom: 30px;
-            letter-spacing: 2px;
+            font-size: 2rem;
+            font-weight: 700;
+            background: linear-gradient(90deg, var(--primary-color), var(--danger-color));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            letter-spacing: 1px;
+        }
+
+        .status-indicator {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.85rem;
+            background-color: rgba(255, 71, 87, 0.1);
+            padding: 5px 12px;
+            border-radius: 20px;
+            color: var(--danger-color);
+            font-weight: 500;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: var(--danger-color);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.5; }
+            100% { opacity: 1; }
+        }
+
+        .status-dot.active {
+            background-color: var(--success-color);
+            animation: none;
         }
 
         .feature-list {
-            text-align: left;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
             margin-top: 20px;
-            list-style: none;
-            padding: 0;
         }
 
-        .feature-list li {
-            font-size: 1.2em;
-            margin: 15px 0;
+        .feature-item {
+            background-color: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            padding: 18px 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            color: #bbb;
+            transition: all var(--transition-speed) ease;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            cursor: pointer;
+        }
+
+        .feature-item:hover {
+            background-color: var(--bg-card-hover);
+            transform: translateX(5px);
+            border-color: rgba(108, 99, 255, 0.3);
+        }
+
+        .feature-info {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .feature-name {
+            font-weight: 600;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .feature-icon {
+            width: 30px;
+            height: 30px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+        }
+
+        .optimize-icon {
+            background-color: rgba(46, 213, 115, 0.15);
+            color: var(--success-color);
+        }
+
+        .drag-icon {
+            background-color: rgba(108, 99, 255, 0.15);
+            color: var(--primary-color);
+        }
+
+        .recoil-icon {
+            background-color: rgba(255, 165, 2, 0.15);
+            color: var(--warning-color);
+        }
+
+        .antiban-icon {
+            background-color: rgba(255, 71, 87, 0.15);
+            color: var(--danger-color);
+        }
+
+        .bypass-icon {
+            background-color: rgba(157, 78, 221, 0.15);
+            color: #9d4edd;
+        }
+
+        .feature-desc {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
         }
 
         .toggle-container {
-            display: flex;
-            justify-content: flex-end;
+            position: relative;
         }
 
         .toggle-btn {
             position: relative;
             width: 60px;
             height: 30px;
-            background-color: #777;
+            background-color: rgba(255, 255, 255, 0.1);
             border-radius: 20px;
             cursor: pointer;
-            transition: background-color 0.3s ease;
+            transition: all var(--transition-speed) ease;
+            border: 2px solid transparent;
         }
 
         .toggle-btn::before {
             content: '';
             position: absolute;
-            top: 4px;
+            top: 3px;
             left: 4px;
-            width: 22px;
-            height: 22px;
-            background-color: white;
+            width: 20px;
+            height: 20px;
+            background-color: var(--text-primary);
             border-radius: 50%;
-            transition: left 0.3s ease;
+            transition: all var(--transition-speed) ease;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
         }
 
-        .active .toggle-btn {
-            background-color: green;
+        .toggle-btn.active {
+            background-color: var(--success-color);
+            border-color: rgba(46, 213, 115, 0.3);
         }
 
-        .active .toggle-btn::before {
+        .toggle-btn.active::before {
             left: 34px;
+            background-color: white;
         }
 
-        .toggle-btn-wrapper {
+        .feature-percentage {
+            font-size: 0.8rem;
+            font-weight: 600;
+            padding: 3px 8px;
+            border-radius: 10px;
+            background-color: rgba(255, 255, 255, 0.05);
+            margin-top: 5px;
+            display: inline-block;
+        }
+
+        .controls {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+            gap: 15px;
+        }
+
+        .btn {
+            padding: 14px 24px;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 1rem;
+            border: none;
+            cursor: pointer;
+            transition: all var(--transition-speed) ease;
             display: flex;
             align-items: center;
+            justify-content: center;
+            gap: 10px;
+            flex: 1;
         }
 
-        .toggle-text {
-            margin-left: 15px;
-            font-size: 1em;
-            color: #bbb;
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: white;
         }
 
-        .toggle-text.active {
-            color: #fff;
+        .btn-primary:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-3px);
+            box-shadow: 0 7px 15px rgba(108, 99, 255, 0.3);
         }
 
+        .btn-secondary {
+            background-color: rgba(255, 255, 255, 0.05);
+            color: var(--text-primary);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .btn-secondary:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            transform: translateY(-3px);
+        }
+
+        .notification {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: var(--success-color);
+            color: white;
+            padding: 15px 25px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transform: translateY(100px);
+            opacity: 0;
+            transition: all 0.5s ease;
+            z-index: 1000;
+        }
+
+        .notification.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .footer {
+            margin-top: 25px;
+            text-align: center;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        /* Responsive design */
+        @media (max-width: 600px) {
+            .container {
+                padding: 20px;
+            }
+            
+            h1 {
+                font-size: 1.7rem;
+            }
+            
+            .controls {
+                flex-direction: column;
+            }
+        }
     </style>
 </head>
 <body>
 
     <div class="container">
-        <h1>HTML Injector</h1>
+        <div class="header">
+            <div class="title-container">
+                <div class="logo-icon">
+                    <i class="fas fa-code"></i>
+                </div>
+                <h1>HTML Injector</h1>
+            </div>
+            <div class="status-indicator">
+                <div class="status-dot" id="status-dot"></div>
+                <span id="status-text">Offline</span>
+            </div>
+        </div>
 
-        <ul class="feature-list">
-            <li>
-                <div class="toggle-btn-wrapper">
-                    <div class="toggle-container" onclick="toggleFeature('optimize')">
-                        <div id="optimize-toggle" class="toggle-btn"></div>
+        <div class="feature-list">
+            <div class="feature-item" onclick="toggleFeature('optimize')">
+                <div class="feature-info">
+                    <div class="feature-name">
+                        <div class="feature-icon optimize-icon">
+                            <i class="fas fa-bolt"></i>
+                        </div>
+                        Optimize
                     </div>
-                    <span class="toggle-text" id="optimize-text">Optimize 100%</span>
+                    <div class="feature-desc">Meningkatkan performa game hingga maksimal</div>
+                    <span class="feature-percentage" id="optimize-percentage">100%</span>
                 </div>
-            </li>
-            <li>
-                <div class="toggle-btn-wrapper">
-                    <div class="toggle-container" onclick="toggleFeature('eazy-drag')">
-                        <div id="eazy-drag-toggle" class="toggle-btn"></div>
+                <div class="toggle-container">
+                    <div id="optimize-toggle" class="toggle-btn"></div>
+                </div>
+            </div>
+
+            <div class="feature-item" onclick="toggleFeature('eazy-drag')">
+                <div class="feature-info">
+                    <div class="feature-name">
+                        <div class="feature-icon drag-icon">
+                            <i class="fas fa-arrows-alt"></i>
+                        </div>
+                        Eazy Drag
                     </div>
-                    <span class="toggle-text" id="eazy-drag-text">Eazy Drag 80%</span>
+                    <div class="feature-desc">Fitur drag and drop yang lebih mudah</div>
+                    <span class="feature-percentage" id="eazy-drag-percentage">80%</span>
                 </div>
-            </li>
-            <li>
-                <div class="toggle-btn-wrapper">
-                    <div class="toggle-container" onclick="toggleFeature('no-recoil')">
-                        <div id="no-recoil-toggle" class="toggle-btn"></div>
+                <div class="toggle-container">
+                    <div id="eazy-drag-toggle" class="toggle-btn"></div>
+                </div>
+            </div>
+
+            <div class="feature-item" onclick="toggleFeature('no-recoil')">
+                <div class="feature-info">
+                    <div class="feature-name">
+                        <div class="feature-icon recoil-icon">
+                            <i class="fas fa-crosshairs"></i>
+                        </div>
+                        No Recoil
                     </div>
-                    <span class="toggle-text" id="no-recoil-text">No Recoil 30%</span>
+                    <div class="feature-desc">Mengurangi recoil senjata secara signifikan</div>
+                    <span class="feature-percentage" id="no-recoil-percentage">30%</span>
                 </div>
-            </li>
-            <li>
-                <div class="toggle-btn-wrapper">
-                    <div class="toggle-container" onclick="toggleFeature('antiban')">
-                        <div id="antiban-toggle" class="toggle-btn"></div>
+                <div class="toggle-container">
+                    <div id="no-recoil-toggle" class="toggle-btn"></div>
+                </div>
+            </div>
+
+            <div class="feature-item" onclick="toggleFeature('antiban')">
+                <div class="feature-info">
+                    <div class="feature-name">
+                        <div class="feature-icon antiban-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        Antiban
                     </div>
-                    <span class="toggle-text" id="antiban-text">Antiban</span>
+                    <div class="feature-desc">Melindungi dari sistem deteksi anti-cheat</div>
                 </div>
-            </li>
-            <li>
-                <div class="toggle-btn-wrapper">
-                    <div class="toggle-container" onclick="toggleFeature('bypass')">
-                        <div id="bypass-toggle" class="toggle-btn"></div>
+                <div class="toggle-container">
+                    <div id="antiban-toggle" class="toggle-btn"></div>
+                </div>
+            </div>
+
+            <div class="feature-item" onclick="toggleFeature('bypass')">
+                <div class="feature-info">
+                    <div class="feature-name">
+                        <div class="feature-icon bypass-icon">
+                            <i class="fas fa-unlock"></i>
+                        </div>
+                        Bypass
                     </div>
-                    <span class="toggle-text" id="bypass-text">Bypass</span>
+                    <div class="feature-desc">Melewati sistem keamanan game</div>
                 </div>
-            </li>
-        </ul>
+                <div class="toggle-container">
+                    <div id="bypass-toggle" class="toggle-btn"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="controls">
+            <button class="btn btn-secondary" onclick="resetAll()">
+                <i class="fas fa-redo"></i> Reset All
+            </button>
+            <button class="btn btn-primary" onclick="applySettings()">
+                <i class="fas fa-play-circle"></i> Apply Settings
+            </button>
+        </div>
+
+        <div class="footer">
+            <p>HTML Injector v2.0 • Modern UI • Status: <span id="connection-status">Disconnected</span></p>
+        </div>
+    </div>
+
+    <div class="notification" id="notification">
+        <i class="fas fa-check-circle"></i>
+        <span id="notification-text">Settings applied successfully!</span>
     </div>
 
     <script>
+        // State untuk setiap fitur
+        const features = {
+            'optimize': { active: false, percentage: 100 },
+            'eazy-drag': { active: false, percentage: 80 },
+            'no-recoil': { active: false, percentage: 30 },
+            'antiban': { active: false },
+            'bypass': { active: false }
+        };
+
+        // Status koneksi
+        let isConnected = false;
+
+        // Fungsi untuk toggle fitur
         function toggleFeature(feature) {
             const toggleElement = document.getElementById(feature + '-toggle');
-            const textElement = document.getElementById(feature + '-text');
+            const featureData = features[feature];
             
+            // Toggle status aktif/tidak
+            featureData.active = !featureData.active;
             toggleElement.classList.toggle('active');
-            textElement.classList.toggle('active');
+            
+            // Update status koneksi
+            updateConnectionStatus();
+            
+            // Tampilkan notifikasi
+            showNotification(`${feature} ${featureData.active ? 'activated' : 'deactivated'}`);
+            
+            // Update UI untuk persentase jika fitur memiliki persentase
+            if (featureData.percentage) {
+                const percentageElement = document.getElementById(feature + '-percentage');
+                if (percentageElement) {
+                    percentageElement.textContent = featureData.active ? `${featureData.percentage}%` : '0%';
+                    percentageElement.style.backgroundColor = featureData.active ? 
+                        'rgba(46, 213, 115, 0.2)' : 'rgba(255, 255, 255, 0.05)';
+                    percentageElement.style.color = featureData.active ? 
+                        'var(--success-color)' : 'var(--text-secondary)';
+                }
+            }
+            
+            console.log(`${feature}: ${featureData.active ? 'ON' : 'OFF'}`);
         }
+
+        // Fungsi untuk apply semua setting
+        function applySettings() {
+            // Hitung berapa banyak fitur yang aktif
+            const activeFeatures = Object.keys(features).filter(key => features[key].active);
+            
+            if (activeFeatures.length === 0) {
+                showNotification("No features activated. Please activate at least one feature.", "warning");
+                return;
+            }
+            
+            // Simulasi proses apply settings
+            showNotification(`Applying ${activeFeatures.length} feature(s)...`, "info");
+            
+            // Simulasi delay
+            setTimeout(() => {
+                // Simulasi koneksi berhasil
+                isConnected = true;
+                updateConnectionStatus();
+                showNotification("All settings applied successfully!", "success");
+                
+                // Log semua fitur yang aktif
+                console.log("Applied features:", activeFeatures);
+            }, 1500);
+        }
+
+        // Fungsi untuk reset semua setting
+        function resetAll() {
+            // Reset semua fitur ke non-aktif
+            Object.keys(features).forEach(feature => {
+                features[feature].active = false;
+                const toggleElement = document.getElementById(feature + '-toggle');
+                toggleElement.classList.remove('active');
+                
+                // Reset persentase jika ada
+                if (features[feature].percentage) {
+                    const percentageElement = document.getElementById(feature + '-percentage');
+                    if (percentageElement) {
+                        percentageElement.textContent = '0%';
+                        percentageElement.style.backgroundColor = 'rgba(255, 255, 255, 0.05)';
+                        percentageElement.style.color = 'var(--text-secondary)';
+                    }
+                }
+            });
+            
+            // Reset status koneksi
+            isConnected = false;
+            updateConnectionStatus();
+            
+            showNotification("All settings have been reset", "info");
+            console.log("All features reset");
+        }
+
+        // Fungsi untuk update status koneksi
+        function updateConnectionStatus() {
+            const statusDot = document.getElementById('status-dot');
+            const statusText = document.getElementById('status-text');
+            const connectionStatus = document.getElementById('connection-status');
+            
+            // Cek jika ada fitur yang aktif
+            const hasActiveFeature = Object.keys(features).some(key => features[key].active);
+            
+            if (isConnected) {
+                statusDot.classList.add('active');
+                statusText.textContent = 'Connected';
+                connectionStatus.textContent = 'Connected';
+                statusText.style.color = 'var(--success-color)';
+                connectionStatus.style.color = 'var(--success-color)';
+            } else if (hasActiveFeature) {
+                statusDot.classList.add('active');
+                statusText.textContent = 'Ready';
+                connectionStatus.textContent = 'Ready';
+                statusText.style.color = 'var(--warning-color)';
+                connectionStatus.style.color = 'var(--warning-color)';
+            } else {
+                statusDot.classList.remove('active');
+                statusText.textContent = 'Offline';
+                connectionStatus.textContent = 'Disconnected';
+                statusText.style.color = 'var(--danger-color)';
+                connectionStatus.style.color = 'var(--danger-color)';
+            }
+        }
+
+        // Fungsi untuk menampilkan notifikasi
+        function showNotification(message, type = "success") {
+            const notification = document.getElementById('notification');
+            const notificationText = document.getElementById('notification-text');
+            
+            // Set warna notifikasi berdasarkan tipe
+            if (type === "success") {
+                notification.style.backgroundColor = "var(--success-color)";
+            } else if (type === "warning") {
+                notification.style.backgroundColor = "var(--warning-color)";
+            } else if (type === "info") {
+                notification.style.backgroundColor = "var(--primary-color)";
+            }
+            
+            notificationText.textContent = message;
+            notification.classList.add('show');
+            
+            // Sembunyikan notifikasi setelah 3 detik
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 3000);
+        }
+
+        // Inisialisasi status awal
+        updateConnectionStatus();
+        
+        // Tambahkan event listener untuk demo
+        document.addEventListener('DOMContentLoaded', function() {
+            // Tampilkan pesan selamat datang
+            setTimeout(() => {
+                showNotification("Welcome to HTML Injector v2.0!", "info");
+            }, 1000);
+        });
     </script>
 
 </body>
