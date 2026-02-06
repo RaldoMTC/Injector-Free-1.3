@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML Injector Style</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #121212;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            text-align: center;
+            border-radius: 10px;
+            background-color: #1f1f1f;
+            padding: 30px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        h1 {
+            color: red;
+            font-size: 2.5em;
+            margin-bottom: 20px;
+        }
+
+        .toggle-button {
+            display: inline-flex;
+            align-items: center;
+            cursor: pointer;
+            border-radius: 20px;
+            background-color: #333;
+            padding: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .toggle-btn {
+            width: 50px;
+            height: 25px;
+            background-color: red;
+            border-radius: 50px;
+            position: relative;
+            transition: 0.3s;
+        }
+
+        .toggle-btn::before {
+            content: '';
+            position: absolute;
+            top: 3px;
+            left: 3px;
+            width: 19px;
+            height: 19px;
+            border-radius: 50%;
+            background-color: white;
+            transition: 0.3s;
+        }
+
+        .active .toggle-btn {
+            background-color: green;
+        }
+
+        .active .toggle-btn::before {
+            left: 26px;
+        }
+
+        .feature-list {
+            margin-top: 20px;
+            text-align: left;
+        }
+
+        .feature-list li {
+            margin: 10px 0;
+            font-size: 1.2em;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>HTML Injector</h1>
+
+        <div class="toggle-button" onclick="toggle()">
+            <div id="toggle" class="toggle-btn"></div>
+        </div>
+        <p id="status">Status: OFF</p>
+
+        <ul class="feature-list">
+            <li>1. Optimize 100%</li>
+            <li>2. Eazy Drag 80%</li>
+            <li>3. No Recoil 30%</li>
+            <li>4. Antiban</li>
+            <li>5. Bypass</li>
+        </ul>
+    </div>
+
+    <script>
+        function toggle() {
+            const toggleElement = document.getElementById('toggle');
+            const statusElement = document.getElementById('status');
+            toggleElement.classList.toggle('active');
+            
+            if (toggleElement.classList.contains('active')) {
+                statusElement.textContent = 'Status: ON';
+            } else {
+                statusElement.textContent = 'Status: OFF';
+            }
+        }
+    </script>
+
+</body>
+</html>
