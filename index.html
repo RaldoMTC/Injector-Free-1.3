@@ -4,9 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HTML Injector Style</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Poppins', sans-serif;
             background-color: #121212;
             color: white;
             display: flex;
@@ -21,44 +22,58 @@
             border-radius: 10px;
             background-color: #1f1f1f;
             padding: 30px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+            width: 400px;
         }
 
         h1 {
             color: red;
             font-size: 2.5em;
-            margin-bottom: 20px;
+            margin-bottom: 30px;
+            letter-spacing: 2px;
         }
 
-        .toggle-button {
-            display: inline-flex;
+        .feature-list {
+            text-align: left;
+            margin-top: 20px;
+            list-style: none;
+            padding: 0;
+        }
+
+        .feature-list li {
+            font-size: 1.2em;
+            margin: 15px 0;
+            display: flex;
+            justify-content: space-between;
             align-items: center;
-            cursor: pointer;
-            border-radius: 20px;
-            background-color: #333;
-            padding: 5px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            color: #bbb;
+        }
+
+        .toggle-container {
+            display: flex;
+            justify-content: flex-end;
         }
 
         .toggle-btn {
-            width: 50px;
-            height: 25px;
-            background-color: red;
-            border-radius: 50px;
             position: relative;
-            transition: 0.3s;
+            width: 60px;
+            height: 30px;
+            background-color: #777;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
         }
 
         .toggle-btn::before {
             content: '';
             position: absolute;
-            top: 3px;
-            left: 3px;
-            width: 19px;
-            height: 19px;
-            border-radius: 50%;
+            top: 4px;
+            left: 4px;
+            width: 22px;
+            height: 22px;
             background-color: white;
-            transition: 0.3s;
+            border-radius: 50%;
+            transition: left 0.3s ease;
         }
 
         .active .toggle-btn {
@@ -66,17 +81,22 @@
         }
 
         .active .toggle-btn::before {
-            left: 26px;
+            left: 34px;
         }
 
-        .feature-list {
-            margin-top: 20px;
-            text-align: left;
+        .toggle-btn-wrapper {
+            display: flex;
+            align-items: center;
         }
 
-        .feature-list li {
-            margin: 10px 0;
-            font-size: 1.2em;
+        .toggle-text {
+            margin-left: 15px;
+            font-size: 1em;
+            color: #bbb;
+        }
+
+        .toggle-text.active {
+            color: #fff;
         }
 
     </style>
@@ -86,31 +106,57 @@
     <div class="container">
         <h1>HTML Injector</h1>
 
-        <div class="toggle-button" onclick="toggle()">
-            <div id="toggle" class="toggle-btn"></div>
-        </div>
-        <p id="status">Status: OFF</p>
-
         <ul class="feature-list">
-            <li>1. Optimize 100%</li>
-            <li>2. Eazy Drag 80%</li>
-            <li>3. No Recoil 30%</li>
-            <li>4. Antiban</li>
-            <li>5. Bypass</li>
+            <li>
+                <div class="toggle-btn-wrapper">
+                    <div class="toggle-container" onclick="toggleFeature('optimize')">
+                        <div id="optimize-toggle" class="toggle-btn"></div>
+                    </div>
+                    <span class="toggle-text" id="optimize-text">Optimize 100%</span>
+                </div>
+            </li>
+            <li>
+                <div class="toggle-btn-wrapper">
+                    <div class="toggle-container" onclick="toggleFeature('eazy-drag')">
+                        <div id="eazy-drag-toggle" class="toggle-btn"></div>
+                    </div>
+                    <span class="toggle-text" id="eazy-drag-text">Eazy Drag 80%</span>
+                </div>
+            </li>
+            <li>
+                <div class="toggle-btn-wrapper">
+                    <div class="toggle-container" onclick="toggleFeature('no-recoil')">
+                        <div id="no-recoil-toggle" class="toggle-btn"></div>
+                    </div>
+                    <span class="toggle-text" id="no-recoil-text">No Recoil 30%</span>
+                </div>
+            </li>
+            <li>
+                <div class="toggle-btn-wrapper">
+                    <div class="toggle-container" onclick="toggleFeature('antiban')">
+                        <div id="antiban-toggle" class="toggle-btn"></div>
+                    </div>
+                    <span class="toggle-text" id="antiban-text">Antiban</span>
+                </div>
+            </li>
+            <li>
+                <div class="toggle-btn-wrapper">
+                    <div class="toggle-container" onclick="toggleFeature('bypass')">
+                        <div id="bypass-toggle" class="toggle-btn"></div>
+                    </div>
+                    <span class="toggle-text" id="bypass-text">Bypass</span>
+                </div>
+            </li>
         </ul>
     </div>
 
     <script>
-        function toggle() {
-            const toggleElement = document.getElementById('toggle');
-            const statusElement = document.getElementById('status');
-            toggleElement.classList.toggle('active');
+        function toggleFeature(feature) {
+            const toggleElement = document.getElementById(feature + '-toggle');
+            const textElement = document.getElementById(feature + '-text');
             
-            if (toggleElement.classList.contains('active')) {
-                statusElement.textContent = 'Status: ON';
-            } else {
-                statusElement.textContent = 'Status: OFF';
-            }
+            toggleElement.classList.toggle('active');
+            textElement.classList.toggle('active');
         }
     </script>
 
