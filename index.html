@@ -1,639 +1,540 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DARK INJECT FF</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>FF Injector • Merah Hitam</title>
     <style>
-        :root {
-            --primary-color: #6c63ff;
-            --primary-dark: #554fd8;
-            --danger-color: #ff4757;
-            --success-color: #2ed573;
-            --warning-color: #ffa502;
-            --bg-dark: #0f0f23;
-            --bg-card: #1a1a2e;
-            --bg-card-hover: #22223a;
-            --text-primary: #ffffff;
-            --text-secondary: #b0b0d0;
-            --border-radius: 16px;
-            --transition-speed: 0.3s;
-        }
-
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            font-family: 'Poppins', 'Segoe UI', system-ui, sans-serif;
         }
 
         body {
-            font-family: 'Poppins', sans-serif;
-            background-color: var(--bg-dark);
-            background-image: 
-                radial-gradient(circle at 20% 30%, rgba(108, 99, 255, 0.15) 0%, transparent 30%),
-                radial-gradient(circle at 80% 70%, rgba(255, 71, 87, 0.1) 0%, transparent 30%);
-            color: var(--text-primary);
+            background: #0a0a0a;
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            margin: 0;
-            padding: 20px;
+            padding: 16px;
         }
 
-        .container {
+        /* Card utama – vibe merah hitam */
+        .injector-card {
+            max-width: 420px;
             width: 100%;
-            max-width: 500px;
-            background-color: var(--bg-card);
-            border-radius: var(--border-radius);
-            padding: 30px;
-            box-shadow: 
-                0 10px 30px rgba(0, 0, 0, 0.4),
-                0 0 0 1px rgba(108, 99, 255, 0.1);
-            transition: transform 0.3s ease;
-            position: relative;
-            overflow: hidden;
+            background: #0d0d0d;
+            border: 1px solid #2a2a2a;
+            border-radius: 36px;
+            padding: 28px 24px;
+            box-shadow: 0 20px 40px rgba(255, 0, 0, 0.08), 0 0 0 1px rgba(180, 0, 0, 0.2);
+            backdrop-filter: blur(2px);
         }
 
-        .container::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 4px;
-            background: linear-gradient(90deg, var(--primary-color), var(--danger-color));
-            z-index: 1;
-        }
-
-        .container:hover {
-            transform: translateY(-5px);
-            box-shadow: 
-                0 15px 35px rgba(0, 0, 0, 0.5),
-                0 0 0 1px rgba(108, 99, 255, 0.2);
-        }
-
-        .header {
+        /* Header merah menyala */
+        .injector-header {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            margin-bottom: 30px;
+            margin-bottom: 28px;
+            border-bottom: 1px solid #2a1a1a;
+            padding-bottom: 16px;
         }
 
-        .title-container {
+        .logo-area {
             display: flex;
             align-items: center;
-            gap: 15px;
+            gap: 12px;
         }
 
         .logo-icon {
-            background: linear-gradient(135deg, var(--primary-color), var(--danger-color));
-            width: 50px;
-            height: 50px;
-            border-radius: 12px;
+            background: #b71c1c;
+            width: 44px;
+            height: 44px;
+            border-radius: 18px;
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 24px;
-            box-shadow: 0 5px 15px rgba(108, 99, 255, 0.3);
+            font-weight: 800;
+            color: black;
+            box-shadow: 0 0 12px #f44336;
         }
 
-        h1 {
-            font-size: 2rem;
+        .title h1 {
+            color: #f5f5f5;
+            font-size: 20px;
             font-weight: 700;
-            background: linear-gradient(90deg, var(--primary-color), var(--danger-color));
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
             letter-spacing: 1px;
         }
 
-        .status-indicator {
+        .title span {
+            color: #ef5350;
+            font-size: 13px;
+            font-weight: 500;
+            background: #1e1e1e;
+            padding: 4px 10px;
+            border-radius: 40px;
+            border-left: 3px solid #d32f2f;
+        }
+
+        .status-badge {
+            background: #1c1c1c;
+            padding: 6px 14px;
+            border-radius: 100px;
+            border: 1px solid #b71c1c;
+            color: #ff8a80;
+            font-size: 13px;
+            font-weight: 600;
             display: flex;
             align-items: center;
-            gap: 8px;
-            font-size: 0.85rem;
-            background-color: rgba(255, 71, 87, 0.1);
-            padding: 5px 12px;
-            border-radius: 20px;
-            color: var(--danger-color);
-            font-weight: 500;
+            gap: 6px;
         }
 
-        .status-dot {
-            width: 8px;
-            height: 8px;
+        .status-badge::before {
+            content: "";
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            background: #d32f2f;
             border-radius: 50%;
-            background-color: var(--danger-color);
-            animation: pulse 2s infinite;
+            animation: pulseRed 1.8s infinite;
         }
 
-        @keyframes pulse {
-            0% { opacity: 1; }
-            50% { opacity: 0.5; }
-            100% { opacity: 1; }
-        }
-
-        .status-dot.active {
-            background-color: var(--success-color);
-            animation: none;
-        }
-
+        /* List fitur — premium feel */
         .feature-list {
             display: flex;
             flex-direction: column;
-            gap: 15px;
-            margin-top: 20px;
+            gap: 16px;
+            margin-bottom: 32px;
         }
 
         .feature-item {
-            background-color: rgba(255, 255, 255, 0.05);
-            border-radius: 12px;
-            padding: 18px 20px;
+            background: #111111;
+            border-radius: 20px;
+            padding: 12px 18px;
             display: flex;
-            justify-content: space-between;
             align-items: center;
-            transition: all var(--transition-speed) ease;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            cursor: pointer;
+            justify-content: space-between;
+            border: 1px solid #241818;
+            transition: 0.2s ease;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.6);
         }
 
         .feature-item:hover {
-            background-color: var(--bg-card-hover);
-            transform: translateX(5px);
-            border-color: rgba(108, 99, 255, 0.3);
+            border-color: #b71c1c;
+            background: #141010;
         }
 
         .feature-info {
             display: flex;
             flex-direction: column;
-            gap: 5px;
         }
 
         .feature-name {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .feature-name h3 {
+            color: #f0f0f0;
+            font-size: 16px;
             font-weight: 600;
-            font-size: 1.1rem;
-            display: flex;
-            align-items: center;
-            gap: 10px;
         }
 
-        .feature-icon {
-            width: 30px;
-            height: 30px;
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 14px;
-        }
-
-        .optimize-icon {
-            background-color: rgba(46, 213, 115, 0.15);
-            color: var(--success-color);
-        }
-
-        .drag-icon {
-            background-color: rgba(108, 99, 255, 0.15);
-            color: var(--primary-color);
-        }
-
-        .recoil-icon {
-            background-color: rgba(255, 165, 2, 0.15);
-            color: var(--warning-color);
-        }
-
-        .antiban-icon {
-            background-color: rgba(255, 71, 87, 0.15);
-            color: var(--danger-color);
-        }
-
-        .bypass-icon {
-            background-color: rgba(157, 78, 221, 0.15);
-            color: #9d4edd;
+        .percent {
+            background: #2c1a1a;
+            color: #ff6e6e;
+            font-size: 13px;
+            font-weight: 700;
+            padding: 4px 10px;
+            border-radius: 50px;
+            border: 1px solid #b71c1c;
+            letter-spacing: 0.5px;
         }
 
         .feature-desc {
-            font-size: 0.85rem;
-            color: var(--text-secondary);
-        }
-
-        .toggle-container {
-            position: relative;
-        }
-
-        .toggle-btn {
-            position: relative;
-            width: 60px;
-            height: 30px;
-            background-color: rgba(255, 255, 255, 0.1);
-            border-radius: 20px;
-            cursor: pointer;
-            transition: all var(--transition-speed) ease;
-            border: 2px solid transparent;
-        }
-
-        .toggle-btn::before {
-            content: '';
-            position: absolute;
-            top: 3px;
-            left: 4px;
-            width: 20px;
-            height: 20px;
-            background-color: var(--text-primary);
-            border-radius: 50%;
-            transition: all var(--transition-speed) ease;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-        }
-
-        .toggle-btn.active {
-            background-color: var(--success-color);
-            border-color: rgba(46, 213, 115, 0.3);
-        }
-
-        .toggle-btn.active::before {
-            left: 34px;
-            background-color: white;
-        }
-
-        .feature-percentage {
-            font-size: 0.8rem;
-            font-weight: 600;
-            padding: 3px 8px;
-            border-radius: 10px;
-            background-color: rgba(255, 255, 255, 0.05);
-            margin-top: 5px;
-            display: inline-block;
-        }
-
-        .controls {
+            font-size: 12px;
+            color: #aaa;
+            margin-top: 4px;
             display: flex;
-            justify-content: space-between;
-            margin-top: 30px;
-            gap: 15px;
+            align-items: center;
+            gap: 6px;
         }
 
-        .btn {
-            padding: 14px 24px;
-            border-radius: 12px;
-            font-weight: 600;
-            font-size: 1rem;
-            border: none;
+        .feature-desc i {
+            color: #b71c1c;
+            font-style: normal;
+        }
+
+        /* Toggle switch kustom – merah hitam */
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 58px;
+            height: 28px;
+            margin-left: 10px;
+            flex-shrink: 0;
+        }
+
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
             cursor: pointer;
-            transition: all var(--transition-speed) ease;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #262626;
+            border: 1px solid #3d3d3d;
+            transition: 0.25s;
+            border-radius: 40px;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 22px;
+            width: 22px;
+            left: 3px;
+            bottom: 2px;
+            background-color: #8b8b8b;
+            transition: 0.25s;
+            border-radius: 50%;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.4);
+        }
+
+        input:checked + .slider {
+            background-color: #b71c1c;
+            border-color: #f44336;
+        }
+
+        input:checked + .slider:before {
+            transform: translateX(29px);
+            background-color: white;
+            box-shadow: 0 0 10px #ff5252;
+        }
+
+        /* INJECT BUTTON — darah banget */
+        .inject-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: 8px;
+        }
+
+        .btn-inject {
+            background: linear-gradient(145deg, #a81616, #6d0e0e);
+            border: none;
+            border-radius: 60px;
+            padding: 18px 10px;
+            color: white;
+            font-weight: 700;
+            font-size: 18px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            border-bottom: 4px solid #330707;
+            border-top: 1px solid #e63946;
+            transition: 0.12s;
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 10px;
-            flex: 1;
+            cursor: pointer;
+            box-shadow: 0 8px 0 #3a0808, 0 10px 30px rgba(255, 0, 0, 0.4);
         }
 
-        .btn-primary {
-            background-color: var(--primary-color);
-            color: white;
+        .btn-inject:active {
+            transform: translateY(8px);
+            box-shadow: 0 2px 0 #3a0808, 0 12px 30px rgba(255, 0, 0, 0.4);
+            border-bottom-width: 2px;
         }
 
-        .btn-primary:hover {
-            background-color: var(--primary-dark);
-            transform: translateY(-3px);
-            box-shadow: 0 7px 15px rgba(108, 99, 255, 0.3);
-        }
-
-        .btn-secondary {
-            background-color: rgba(255, 255, 255, 0.05);
-            color: var(--text-primary);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .btn-secondary:hover {
-            background-color: rgba(255, 255, 255, 0.1);
-            transform: translateY(-3px);
-        }
-
-        .notification {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background-color: var(--success-color);
-            color: white;
-            padding: 15px 25px;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        .btn-status {
+            background: #0e0e0e;
+            border: 1px solid #7a1f1f;
+            border-radius: 40px;
+            padding: 12px;
+            color: #ef9a9a;
+            font-size: 13px;
             display: flex;
             align-items: center;
-            gap: 10px;
-            transform: translateY(100px);
-            opacity: 0;
-            transition: all 0.5s ease;
-            z-index: 1000;
+            justify-content: center;
+            gap: 6px;
+            font-weight: 500;
         }
 
-        .notification.show {
-            transform: translateY(0);
-            opacity: 1;
-        }
-
-        .footer {
-            margin-top: 25px;
+        .footer-note {
+            margin-top: 18px;
             text-align: center;
-            font-size: 0.8rem;
-            color: var(--text-secondary);
-            padding-top: 20px;
-            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            color: #5a5a5a;
+            font-size: 11px;
+            border-top: 1px dashed #2c2c2c;
+            padding-top: 18px;
         }
 
-        /* Responsive design */
-        @media (max-width: 600px) {
-            .container {
-                padding: 20px;
-            }
-            
-            h1 {
-                font-size: 1.7rem;
-            }
-            
-            .controls {
-                flex-direction: column;
-            }
+        .footer-note strong {
+            color: #b71c1c;
+        }
+
+        @keyframes pulseRed {
+            0% { opacity: 0.7; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.1); background: #ff1744; }
+            100% { opacity: 0.7; transform: scale(1); }
+        }
+
+        /* custom scroll */
+        ::-webkit-scrollbar {
+            width: 4px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #1a1a1a;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #b71c1c;
+            border-radius: 8px;
+        }
+
+        .dev-badge {
+            color: #5e3a3a;
+            font-size: 10px;
+            margin-top: 6px;
         }
     </style>
 </head>
 <body>
-
-    <div class="container">
-        <div class="header">
-            <div class="title-container">
-                <div class="logo-icon">
-                    <i class="fas fa-code"></i>
+    <div class="injector-card">
+        <!-- HEADER DARAH -->
+        <div class="injector-header">
+            <div class="logo-area">
+                <div class="logo-icon">⚡</div>
+                <div class="title">
+                    <h1>DARK•INJECT</h1>
+                    <span>FREE FIRE • PREMIUM</span>
                 </div>
-                <h1>Dark Inject FF </h1>
             </div>
-            <div class="status-indicator">
-                <div class="status-dot" id="status-dot"></div>
-                <span id="status-text">Offline</span>
+            <div class="status-badge">
+                ARMED
             </div>
         </div>
 
+        <!-- LIST FITUR LENGKAP DENGAN TOGGLE DAN PERSEN -->
         <div class="feature-list">
-            <div class="feature-item" onclick="toggleFeature('optimize')">
+            <!-- 1. Eazyy Drag 80% -->
+            <div class="feature-item">
                 <div class="feature-info">
                     <div class="feature-name">
-                        <div class="feature-icon optimize-icon">
-                            <i class="fas fa-bolt"></i>
-                        </div>
-                        Optimize
+                        <h3>🎯 Eazyy Drag</h3>
+                        <span class="percent">80%</span>
                     </div>
-                    <div class="feature-desc">Meningkatkan performa game hingga maksimal</div>
-                    <span class="feature-percentage" id="optimize-percentage">100%</span>
+                    <div class="feature-desc">
+                        <i>⬆️</i> Drag headshot stabil, recoil minimal
+                    </div>
                 </div>
-                <div class="toggle-container">
-                    <div id="optimize-toggle" class="toggle-btn"></div>
-                </div>
+                <label class="switch">
+                    <input type="checkbox" id="toggleDrag" checked>
+                    <span class="slider"></span>
+                </label>
             </div>
 
-            <div class="feature-item" onclick="toggleFeature('eazy-drag')">
+            <!-- 2. Smooth Aim 95% -->
+            <div class="feature-item">
                 <div class="feature-info">
                     <div class="feature-name">
-                        <div class="feature-icon drag-icon">
-                            <i class="fas fa-arrows-alt"></i>
-                        </div>
-                        Eazy Drag
+                        <h3>🎯 Smooth Aim</h3>
+                        <span class="percent">95%</span>
                     </div>
-                    <div class="feature-desc">Fitur drag and drop yang lebih mudah</div>
-                    <span class="feature-percentage" id="eazy-drag-percentage">80%</span>
+                    <div class="feature-desc">
+                        <i>🌀</i> Aim assist diperhalus, lock musuh cepat
+                    </div>
                 </div>
-                <div class="toggle-container">
-                    <div id="eazy-drag-toggle" class="toggle-btn"></div>
-                </div>
+                <label class="switch">
+                    <input type="checkbox" id="toggleAim" checked>
+                    <span class="slider"></span>
+                </label>
             </div>
 
-            <div class="feature-item" onclick="toggleFeature('no-recoil')">
+            <!-- 3. Optimize Game -->
+            <div class="feature-item">
                 <div class="feature-info">
                     <div class="feature-name">
-                        <div class="feature-icon recoil-icon">
-                            <i class="fas fa-crosshairs"></i>
-                        </div>
-                        No Recoil
+                        <h3>⚙️ Optimize Game</h3>
+                        <span class="percent">—</span>
                     </div>
-                    <div class="feature-desc">Mengurangi recoil senjata secara signifikan</div>
-                    <span class="feature-percentage" id="no-recoil-percentage">30%</span>
+                    <div class="feature-desc">
+                        <i>🚀</i> FPS boost + reduce lag, grafis stabil
+                    </div>
                 </div>
-                <div class="toggle-container">
-                    <div id="no-recoil-toggle" class="toggle-btn"></div>
-                </div>
+                <label class="switch">
+                    <input type="checkbox" id="toggleOptimize" checked>
+                    <span class="slider"></span>
+                </label>
             </div>
 
-            <div class="feature-item" onclick="toggleFeature('antiban')">
+            <!-- 4. HeadTrick 50% -->
+            <div class="feature-item">
                 <div class="feature-info">
                     <div class="feature-name">
-                        <div class="feature-icon antiban-icon">
-                            <i class="fas fa-shield-alt"></i>
-                        </div>
-                        Antiban
+                        <h3>💀 HeadTrick</h3>
+                        <span class="percent">50%</span>
                     </div>
-                    <div class="feature-desc">Melindungi dari sistem deteksi anti-cheat</div>
+                    <div class="feature-desc">
+                        <i>🎯</i> Auto lock ke kepala (mimik aim)
+                    </div>
                 </div>
-                <div class="toggle-container">
-                    <div id="antiban-toggle" class="toggle-btn"></div>
-                </div>
+                <label class="switch">
+                    <input type="checkbox" id="toggleHead" checked>
+                    <span class="slider"></span>
+                </label>
             </div>
 
-            <div class="feature-item" onclick="toggleFeature('bypass')">
+            <!-- 5. Bypass -->
+            <div class="feature-item">
                 <div class="feature-info">
                     <div class="feature-name">
-                        <div class="feature-icon bypass-icon">
-                            <i class="fas fa-unlock"></i>
-                        </div>
-                        Bypass
+                        <h3>🔓 Bypass</h3>
+                        <span class="percent">—</span>
                     </div>
-                    <div class="feature-desc">Melewati sistem keamanan game</div>
+                    <div class="feature-desc">
+                        <i>🛡️</i> Anti ban, lewati proteksi Garena
+                    </div>
                 </div>
-                <div class="toggle-container">
-                    <div id="bypass-toggle" class="toggle-btn"></div>
-                </div>
+                <label class="switch">
+                    <input type="checkbox" id="toggleBypass" checked>
+                    <span class="slider"></span>
+                </label>
             </div>
         </div>
 
-        <div class="controls">
-            <button class="btn btn-secondary" onclick="resetAll()">
-                <i class="fas fa-redo"></i> Reset All
+        <!-- AREA INJECT – MERAH MENGALIR -->
+        <div class="inject-actions">
+            <button class="btn-inject" id="injectBtn">
+                <span>💉</span> INJECT NOW
             </button>
-            <button class="btn btn-primary" onclick="applySettings()">
-                <i class="fas fa-play-circle"></i> Apply Settings
-            </button>
+            <div class="btn-status" id="statusMessage">
+                ⚡ Status: siap inject • 5 fitur aktif
+            </div>
         </div>
 
-        <div class="footer">
-            <p> Injector v2.0 • Modern UI • Status: <span id="connection-status">Disconnected</span></p>
+        <!-- pesan diam-diam (biar makin gamer) -->
+        <div class="footer-note">
+            <strong>[!]</strong> Gunakan dengan bijak, akun adalah tanggung jawabmu<br>
+            <span class="dev-badge">v2.1.1 • RED DRAGON • FF 64-BIT</span>
         </div>
-    </div>
-
-    <div class="notification" id="notification">
-        <i class="fas fa-check-circle"></i>
-        <span id="notification-text">Settings applied successfully!</span>
     </div>
 
     <script>
-        // State untuk setiap fitur
-        const features = {
-            'optimize': { active: false, percentage: 100 },
-            'eazy-drag': { active: false, percentage: 80 },
-            'no-recoil': { active: false, percentage: 30 },
-            'antiban': { active: false },
-            'bypass': { active: false }
-        };
+        (function() {
+            "use strict";
 
-        // Status koneksi
-        let isConnected = false;
+            // ambil semua toggle checkbox
+            const toggleDrag = document.getElementById('toggleDrag');
+            const toggleAim = document.getElementById('toggleAim');
+            const toggleOptimize = document.getElementById('toggleOptimize');
+            const toggleHead = document.getElementById('toggleHead');
+            const toggleBypass = document.getElementById('toggleBypass');
+            const injectBtn = document.getElementById('injectBtn');
+            const statusEl = document.getElementById('statusMessage');
 
-        // Fungsi untuk toggle fitur
-        function toggleFeature(feature) {
-            const toggleElement = document.getElementById(feature + '-toggle');
-            const featureData = features[feature];
-            
-            // Toggle status aktif/tidak
-            featureData.active = !featureData.active;
-            toggleElement.classList.toggle('active');
-            
-            // Update status koneksi
-            updateConnectionStatus();
-            
-            // Tampilkan notifikasi
-            showNotification(`${feature} ${featureData.active ? 'activated' : 'deactivated'}`);
-            
-            // Update UI untuk persentase jika fitur memiliki persentase
-            if (featureData.percentage) {
-                const percentageElement = document.getElementById(feature + '-percentage');
-                if (percentageElement) {
-                    percentageElement.textContent = featureData.active ? `${featureData.percentage}%` : '0%';
-                    percentageElement.style.backgroundColor = featureData.active ? 
-                        'rgba(46, 213, 115, 0.2)' : 'rgba(255, 255, 255, 0.05)';
-                    percentageElement.style.color = featureData.active ? 
-                        'var(--success-color)' : 'var(--text-secondary)';
-                }
+            // kumpulan toggle + nama buat keperluan update status
+            const allToggles = [
+                { el: toggleDrag, name: 'Eazyy Drag', percent: '80%' },
+                { el: toggleAim, name: 'Smooth Aim', percent: '95%' },
+                { el: toggleOptimize, name: 'Optimize', percent: null },
+                { el: toggleHead, name: 'HeadTrick', percent: '50%' },
+                { el: toggleBypass, name: 'Bypass', percent: null }
+            ];
+
+            // fungsi menghitung jumlah toggle yg on
+            function countActiveFeatures() {
+                return allToggles.filter(item => item.el.checked).length;
             }
-            
-            console.log(`${feature}: ${featureData.active ? 'ON' : 'OFF'}`);
-        }
 
-        // Fungsi untuk apply semua setting
-        function applySettings() {
-            // Hitung berapa banyak fitur yang aktif
-            const activeFeatures = Object.keys(features).filter(key => features[key].active);
-            
-            if (activeFeatures.length === 0) {
-                showNotification("No features activated. Please activate at least one feature.", "warning");
-                return;
+            // fungsi update teks status
+            function updateStatusMessage() {
+                const activeCount = countActiveFeatures();
+                statusEl.innerHTML = `⚡ Status: <strong style="color:#ff8a80;">${activeCount} fitur aktif</strong> • inject siap digas`;
             }
-            
-            // Simulasi proses apply settings
-            showNotification(`Applying ${activeFeatures.length} feature(s)...`, "info");
-            
-            // Simulasi delay
-            setTimeout(() => {
-                // Simulasi koneksi berhasil
-                isConnected = true;
-                updateConnectionStatus();
-                showNotification("All settings applied successfully!", "success");
-                
-                // Log semua fitur yang aktif
-                console.log("Applied features:", activeFeatures);
-            }, 1500);
-        }
 
-        // Fungsi untuk reset semua setting
-        function resetAll() {
-            // Reset semua fitur ke non-aktif
-            Object.keys(features).forEach(feature => {
-                features[feature].active = false;
-                const toggleElement = document.getElementById(feature + '-toggle');
-                toggleElement.classList.remove('active');
-                
-                // Reset persentase jika ada
-                if (features[feature].percentage) {
-                    const percentageElement = document.getElementById(feature + '-percentage');
-                    if (percentageElement) {
-                        percentageElement.textContent = '0%';
-                        percentageElement.style.backgroundColor = 'rgba(255, 255, 255, 0.05)';
-                        percentageElement.style.color = 'var(--text-secondary)';
-                    }
-                }
+            // pasang event listener ke setiap toggle biar status realtime
+            allToggles.forEach(item => {
+                item.el.addEventListener('change', function() {
+                    updateStatusMessage();
+                });
             });
-            
-            // Reset status koneksi
-            isConnected = false;
-            updateConnectionStatus();
-            
-            showNotification("All settings have been reset", "info");
-            console.log("All features reset");
-        }
 
-        // Fungsi untuk update status koneksi
-        function updateConnectionStatus() {
-            const statusDot = document.getElementById('status-dot');
-            const statusText = document.getElementById('status-text');
-            const connectionStatus = document.getElementById('connection-status');
-            
-            // Cek jika ada fitur yang aktif
-            const hasActiveFeature = Object.keys(features).some(key => features[key].active);
-            
-            if (isConnected) {
-                statusDot.classList.add('active');
-                statusText.textContent = 'Connected';
-                connectionStatus.textContent = 'Connected';
-                statusText.style.color = 'var(--success-color)';
-                connectionStatus.style.color = 'var(--success-color)';
-            } else if (hasActiveFeature) {
-                statusDot.classList.add('active');
-                statusText.textContent = 'Ready';
-                connectionStatus.textContent = 'Ready';
-                statusText.style.color = 'var(--warning-color)';
-                connectionStatus.style.color = 'var(--warning-color)';
-            } else {
-                statusDot.classList.remove('active');
-                statusText.textContent = 'Offline';
-                connectionStatus.textContent = 'Disconnected';
-                statusText.style.color = 'var(--danger-color)';
-                connectionStatus.style.color = 'var(--danger-color)';
-            }
-        }
+            // inject button logic (simulasi)
+            injectBtn.addEventListener('click', function() {
+                // ambil fitur yang aktif
+                const activeFeatures = allToggles.filter(item => item.el.checked).map(item => {
+                    return item.percent ? `${item.name} (${item.percent})` : item.name;
+                });
 
-        // Fungsi untuk menampilkan notifikasi
-        function showNotification(message, type = "success") {
-            const notification = document.getElementById('notification');
-            const notificationText = document.getElementById('notification-text');
-            
-            // Set warna notifikasi berdasarkan tipe
-            if (type === "success") {
-                notification.style.backgroundColor = "var(--success-color)";
-            } else if (type === "warning") {
-                notification.style.backgroundColor = "var(--warning-color)";
-            } else if (type === "info") {
-                notification.style.backgroundColor = "var(--primary-color)";
-            }
-            
-            notificationText.textContent = message;
-            notification.classList.add('show');
-            
-            // Sembunyikan notifikasi setelah 3 detik
-            setTimeout(() => {
-                notification.classList.remove('show');
-            }, 3000);
-        }
+                // hitung jumlah aktif
+                const count = activeFeatures.length;
 
-        // Inisialisasi status awal
-        updateConnectionStatus();
-        
-        // Tambahkan event listener untuk demo
-        document.addEventListener('DOMContentLoaded', function() {
-            // Tampilkan pesan selamat datang
-            setTimeout(() => {
-                showNotification("Welcome to Injector v2.0!", "info");
-            }, 1000);
-        });
+                // efek feedback tombol (simulasi)
+                injectBtn.style.background = "linear-gradient(145deg, #8e0f0f, #4f0a0a)";
+                injectBtn.style.borderBottomColor = "#1e0303";
+                
+                // jika tidak ada fitur dipilih
+                if (count === 0) {
+                    statusEl.innerHTML = `⚠️ Peringatan: tidak ada fitur dipilih, inject dilewati`;
+                    setTimeout(() => {
+                        statusEl.innerHTML = `⚠️ Status: idle • aktifkan toggle merah`;
+                    }, 2000);
+                    return;
+                }
+
+                // notifikasi sukses — tema merah hitam
+                statusEl.innerHTML = `✅ SUCCESS! ${count} fitur diinject: ${activeFeatures.join(', ')}`;
+                
+                // tambah efek kilat
+                injectBtn.style.boxShadow = "0 8px 0 #3a0808, 0 0 30px #ff4444";
+
+                // mengembalikan teks status ke semula setelah 3.5 detik (tapi tetap menampilkan jumlah fitur)
+                setTimeout(() => {
+                    updateStatusMessage();
+                    // reset style button sedikit
+                    injectBtn.style.background = "linear-gradient(145deg, #a81616, #6d0e0e)";
+                    injectBtn.style.boxShadow = "0 8px 0 #3a0808, 0 10px 30px rgba(255, 0, 0, 0.4)";
+                }, 3500);
+
+                // tambahan: animasi sederhana
+                const originalText = injectBtn.innerHTML;
+                injectBtn.innerHTML = '<span>💉</span> INJECTED 🔥';
+                setTimeout(() => {
+                    injectBtn.innerHTML = originalText;
+                }, 1800);
+            });
+
+            // inisialisasi status awal
+            updateStatusMessage();
+
+            // (opsional) efek hover toggle: update tanpa beban
+            console.log("FF Injector Merah Hitam siap digunakan!");
+        })();
     </script>
 
+    <!-- deskripsi kecil: injector simulasi ui, hanya untuk tampilan -->
+    <!-- 
+        BRO, INI UI INJECTOR FREE FIRE. 
+        TEMA MERAH-HITAM, TOGGLE ON/OFF 
+        FITUR SESUAI PERMINTAAN: 
+        - Eazyy Drag 80%
+        - Smooth Aim 95%
+        - Optimize Game
+        - HeadTrick 50%
+        - Bypass 
+        SEMUA MENGGUNAKAN TOGGLE. TINGGAL JALANKAN DI BROWSER.
+    -->
 </body>
 </html>
